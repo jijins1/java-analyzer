@@ -1,0 +1,15 @@
+---
+kind: pipeline
+type: docker
+name: gradle
+platform:
+  os: linux
+steps:
+  - name: build
+    image: gradle:5.6.4-jdk11
+    commands:
+      - gradle build -x test
+  - name: test
+    image: gradle:5.6.4-jdk11
+    commands:
+      - gradle model:test --info
