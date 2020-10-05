@@ -1,5 +1,6 @@
 package com.ruokki.parser
 
+import com.ruokki.parser.field.FieldIndexJavaClass
 import mu.KotlinLogging
 import org.apache.lucene.store.Directory
 import org.apache.lucene.store.FSDirectory
@@ -19,7 +20,7 @@ fun main() {
 
     logger.info { "Start indexing" }
     val directory: Directory = FSDirectory.open(path)
-    val sourceIndex = SourceIndex(directory, MyCustomAnalyzer())
+    val sourceIndex = SourceIndex(directory, MyCustomAnalyzer(), arrayOf(FieldIndexJavaClass()))
     sourceIndex.addAllFileToIndex(file)
 
     val queryStringWhiteMage = "Unit"
