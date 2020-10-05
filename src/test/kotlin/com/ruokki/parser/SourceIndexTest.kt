@@ -1,5 +1,6 @@
 package com.ruokki.parser
 
+import com.ruokki.parser.field.FieldIndexJavaClass
 import junit.framework.TestCase
 import org.apache.lucene.store.Directory
 import org.apache.lucene.store.FSDirectory
@@ -22,7 +23,7 @@ class SourceIndexTest : TestCase() {
 
 
         val directory: Directory = FSDirectory.open(path)
-        sourceIndex = SourceIndex(directory, MyCustomAnalyzer())
+        sourceIndex = SourceIndex(directory, MyCustomAnalyzer(), arrayOf(FieldIndexJavaClass()) )
 
         sourceIndex.addAllFileToIndex(file)
     }
@@ -37,7 +38,11 @@ class SourceIndexTest : TestCase() {
     }
 
     fun testFieldDontUseJavaTerm() {
-        val result = sourceIndex.searchIndex("field", "barreLife")
+        val result = sourceIndex.searchIndex(FIELDNAME, "barreLife")
+        assertThat(result).isNotNull.isNotEmpty
+    }
+    fun testMethod() {
+        val result = sourceIndex.searchIndex(METHODNAME, "initUnit")
         assertThat(result).isNotNull.isNotEmpty
     }
     override fun tearDown() {

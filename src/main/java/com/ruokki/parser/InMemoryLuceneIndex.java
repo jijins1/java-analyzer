@@ -115,5 +115,7 @@ public class InMemoryLuceneIndex {
         return null;
 
     }
+    public class Test{
 
+    }
 }
