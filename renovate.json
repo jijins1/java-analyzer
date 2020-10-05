@@ -1,0 +1,7 @@
+{
+  "baseBranches": ["dev"],
+  "extends": [
+    "config:base",
+    ":automergeAll"
+  ]
+}
